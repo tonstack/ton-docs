@@ -17,29 +17,36 @@ pair$_ {X:Type} {Y:Type} first:X second:Y = Both X Y;
 
 bit$_ (## 1) = Bit;
 
+// ---------- addresses -----------
 addr_none$00 = MsgAddressExt;
 addr_extern$01 len:(## 9) external_address:(bits len) 
-             = MsgAddressExt;
+    = MsgAddressExt;
              
 anycast_info$_ depth:(#<= 30) { depth >= 1 }
-   rewrite_pfx:(bits depth) = Anycast;
+    rewrite_pfx:(bits depth) = Anycast;
    
 addr_std$10 anycast:(Maybe Anycast) 
-   workchain_id:int8 address:bits256  = MsgAddressInt;
+    workchain_id:int8 address:bits256 = MsgAddressInt;
 addr_var$11 anycast:(Maybe Anycast) addr_len:(## 9) 
-   workchain_id:int32 address:(bits addr_len) = MsgAddressInt;
+    workchain_id:int32 address:(bits addr_len) = MsgAddressInt;
    
 _ _:MsgAddressInt = MsgAddress;
 _ _:MsgAddressExt = MsgAddress;
+// --------------------------------
 
+// ---------- var u/int -----------
 var_uint$_ {n:#} len:(#< n) value:(uint (len * 8))
-         = VarUInteger n;
+    = VarUInteger n;
 var_int$_ {n:#} len:(#< n) value:(int (len * 8)) 
-        = VarInteger n;
+    = VarInteger n;
+// --------------------------------
+
+// ---------- currencies ----------
 nanotons$_ amount:(VarUInteger 16) = TONs;  
 
 extra_currencies$_ dict:(HashmapE 32 (VarUInteger 32)) 
-                 = ExtraCurrencyCollection;
+    = ExtraCurrencyCollection;
                  
 currencies$_ tons:TONs other:ExtraCurrencyCollection 
-           = CurrencyCollection;
+    = CurrencyCollection;
+// --------------------------------
