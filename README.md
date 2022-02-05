@@ -2,6 +2,9 @@
 
 TL-B (Type Language - Binary) serves to describe the type system, constructors, and existing functions. For example we can use TL-B schemes to build binary structures associated with the TON blockchain.
 
+## Table of contents
+- [TON combinators naming](sections/combinators-naming.md)
+
 ## Overview
 
 We refer to any set of TL-B constructs as TL-B documents. A TL-B document usually consists of two sections, which are separated by the `---functions---` keyword. The first section consists of declarations of built-in types and aggregate types (i.e. their constructors). The second section consists of the declared functions, i.e. functional combinators. We may not follow the separation principle in small documents with no more than one functional combinator.
