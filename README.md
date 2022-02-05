@@ -11,7 +11,7 @@ The first and second sections consist of combinator declarations, each ending wi
 If additional type declarations are required after functions have been declared, the keyword (section divider)  
 `---types---` is used. Furthermore, a functional combinator may be declared in the type section if its result type begins with an exclamation point (in fact, when the function section is interpreted, this exclamation point is added automatically).
 
-To explicitly define 32-bit names of combinators, a hash mark (#) is added immediately after the combinator’s name, followed by 8 hexadecimal digits. In this documentation we will look at an example of how to correctly define a 32-bit combinator name for an internal message in the TON blockchain.
+To explicitly define 32-bit names of combinators, a hash mark (`#`) is added immediately after the combinator’s name, followed by 8 hexadecimal digits. In this documentation we will look at an example of how to correctly define a 32-bit combinator name for an internal message in the TON blockchain.
 
 ### Comments
 
