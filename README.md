@@ -4,6 +4,7 @@ TL-B (Type Language - Binary) serves to describe the type system, constructors, 
 
 ## Table of contents
 - [TON combinators naming](sections/combinators-naming.md)
+- [Library usage](sections/library-usage.md)
 
 ## Overview
 
