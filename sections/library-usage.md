@@ -11,7 +11,7 @@ In TL-B libraries there is no concept of cyclic import. Just indicate the depend
 file `mydoc.tlb`:
 ```c
 //
-// `dependson "libraries/tonstdlib.tlb"`
+// dependson "libraries/tonstdlib.tlb"
 //
 
 op:uint32 data:Any = MsgBody;
