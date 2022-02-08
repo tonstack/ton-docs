@@ -26,30 +26,8 @@ If additional type declarations are required after functions have been declared,
 To explicitly define 32-bit names of combinators, a hash mark (`#`) is added immediately after the combinator’s name, followed by 8 hexadecimal digits. In this documentation we will look at an example of how to correctly define a 32-bit combinator name for an internal message in the TON blockchain.
 
 Here is an example of a possible TL-B document.    
-We used the symbols `|`, `_`, `↓`, `↑`, `-` for terminology - they are not part of the TL-B scheme.
-```
-| combinator       |
-| declaration      |   | end symbol |
-|__________________|         ↓
-rop:uint32 data:Any = MsgBody;
- ↑     ↑              | type |_____
-ident  type-expr      | combinator |
-----------------      | name       |
-field definition      |____________|
+![alt text](img/tlb.svg)
 
- ______________________________________________________
-| combinator declaration                               |
-|______________________________________________________|
-|            | tag |                                   |    | end symbol |
-                ↓                                                 ↓
-somethingdata#0x5b367853  body:(Either MsgBody ^MsgBody) = Request;
-|____________||_______|  |_____________________________|   |_____|___________
-| const- |    | prefix|  | field definition            |   | functional      |
-| ructor |    | code  |  | ident:type-expr             |   | combinator name |
-| name   |    |       |  |_____________________________|   |_________________|
-|_____________________|
-| constructor         |
-```
 
 ### Constructor rules
 
