@@ -1,1 +1,0 @@
-## TON combinators naming
