@@ -26,7 +26,7 @@ If additional type declarations are required after functions have been declared,
 To explicitly define 32-bit names of combinators, a hash mark (`#`) is added immediately after the combinator’s name, followed by 8 hexadecimal digits. In this documentation we will look at an example of how to correctly define a 32-bit combinator name for an internal message in the TON blockchain.
 
 Here is an example of a possible TL-B document.    
-<img alt="tlb structure" src="img/tlb.svg" width="100%">
+<img alt="tlb structure" src="img/tlb-pic.svg" width="100%">
 
 
 ### Constructor rules
