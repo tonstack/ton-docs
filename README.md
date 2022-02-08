@@ -2,11 +2,15 @@
 
 TL-B (Type Language - Binary) serves to describe the type system, constructors, and existing functions. For example we can use TL-B schemes to build binary structures associated with the TON blockchain.
 
-## Table of contents
-- [TON combinators naming](sections/combinators-naming.md)
-- [Library usage](sections/library-usage.md)
+### Table of contents
+- [TL-B Language](#tl-b-language)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Comments](#comments)
+  - [Library usage](#library-usage)
+  - [Useful sources](#useful-sources)
 
-## Overview
+### Overview
 
 We refer to any set of TL-B constructs as TL-B documents. A TL-B document usually consists of two sections, which are separated by the `---functions---` keyword. The first section consists of declarations of types (i.e. their constructors). The second section consists of the declared functions, i.e. functional combinators. 
 
@@ -53,6 +57,37 @@ a comment
 */
 
 // This is one line comment
+```
+
+### Library usage
+
+You can use TL-B libraries to extend your documents and to avoid writing repetitive schemes. We have prepared a set of ready-made libraries that you can use. They are mostly based on block.tlb, but we have also added some combinators of our own.
+
+- `tonstdlib.tlb`
+- `tonextlib.tlb`
+- `hashmap.tlb`
+
+In TL-B libraries there is no concept of cyclic import. Just indicate the dependency on some other document (library) at the top of the document with the keyword `dependson`. For example:
+
+file `mydoc.tlb`:
+```c
+//
+// dependson "libraries/tonstdlib.tlb"
+//
+
+op:uint32 data:Any = MsgBody;
+something$0101 data:(Maybe ^MsgBody) = SomethingImportant;
+```
+
+In dependencies, you are required to specify the correct relative path. The example above is located in such a tree:
+
+```
+.
+├── mydoc.tlb
+├── libraries
+│   ├── ...
+│   └── tonstdlib.tlb
+└── ...
 ```
 
 ### Useful sources
