@@ -61,7 +61,7 @@ hmn_leaf#_ {X:Type} value:X = HashmapNode 0 X;
 
 The left-hand side of each equation describes a way to define, or even to
 serialize, a value of the type indicated in the right-hand side. Such a description begins with the name of a constructor, such as `hm_edge` or `hml_long`,
-immediately followed by an optional constructor tag, such as #_ or $10, which
+immediately followed by an optional constructor tag, such as `#_` or `$10`, which
 describes the bitstring used to encode (serialize) the constructor in question.
 
 ### Namespaces
