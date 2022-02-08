@@ -64,6 +64,7 @@ serialize, a value of the type indicated in the right-hand side. Such a descript
 immediately followed by an optional constructor tag, such as `#_` or `$10`, which
 describes the bitstring used to encode (serialize) the constructor in question.
 
+learn by examples!
 | constructor           | serialization                         |
 |-----------------------|---------------------------------------|
 | `some#0x3f5476ca`     | 32-bit uint serialize from hex value  |
