@@ -18,11 +18,11 @@ If additional type declarations are required after functions have been declared,
 To explicitly define 32-bit names of combinators, a hash mark (`#`) is added immediately after the combinator’s name, followed by 8 hexadecimal digits. In this documentation we will look at an example of how to correctly define a 32-bit combinator name for an internal message in the TON blockchain.
 
 ```
-| combinator declaration                        | end symbol |
-|-------------------------------------------|         |
+| combinator declaration                    |   | end symbol |
+|___________________________________________|         |
 notification#0x3f5476ca comment:StartComment          ↓
     real_body:(Either MsgBody ^MsgBody)      = Request;
-   |________| |-----------------------|       |_______|
+   |________| |_______________________|       |_______|
    | const- | | constructor body      |       |combinator
    | ructor                           |
    | name                             |
