@@ -37,16 +37,16 @@ ident  type-expr      | combinator |
 ----------------      | name       |
 field definition      |____________|
 
- ___________________________________________________________
-| combinator declaration                                    |
-|___________________________________________________________|
-|            | tag |                                        |    | end symbol |
-                ↓                                                      ↓
-notification#0x3f5476ca   real_body:(Either MsgBody ^MsgBody) = Request;
-|____________||_______|  |__________________________________|   |_____|___________
-| const- |    | prefix|  | field definition                 |   | functional      |
-| ructor |    | code  |  | ident:type-expr                  |   | combinator name |
-| name   |    |       |  |__________________________________|   |_________________|
+ ______________________________________________________
+| combinator declaration                               |
+|______________________________________________________|
+|            | tag |                                   |    | end symbol |
+                ↓                                                 ↓
+somethingdata#0x5b367853  body:(Either MsgBody ^MsgBody) = Request;
+|____________||_______|  |_____________________________|   |_____|___________
+| const- |    | prefix|  | field definition            |   | functional      |
+| ructor |    | code  |  | ident:type-expr             |   | combinator name |
+| name   |    |       |  |_____________________________|   |_________________|
 |_____________________|
 | constructor         |
 ```
