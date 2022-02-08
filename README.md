@@ -59,10 +59,7 @@ hmn_leaf#_ {X:Type} value:X = HashmapNode 0 X;
 // ....
 ```
 
-The left-hand side of each equation describes a way to define, or even to
-serialize, a value of the type indicated in the right-hand side. Such a description begins with the name of a constructor, such as `hm_edge` or `hml_long`,
-immediately followed by an optional constructor tag, such as `#_` or `$10`, which
-describes the bitstring used to encode (serialize) the constructor in question.
+The left-hand side of each equation describes a way to define, or even to serialize, a value of the type indicated in the right-hand side. Such a description begins with the name of a constructor, such as `hm_edge` or `hml_long`, immediately followed by an optional constructor tag, such as `#_` or `$10`, which describes the bitstring used to encode (serialize) the constructor in question.
 
 learn by examples!
 | constructor           | serialization                         |
@@ -71,6 +68,10 @@ learn by examples!
 | `some$0101`           | serialize `0101` raw bits             |
 | `some#`               | serialize crc32 of string `some`      |
 | `some#_` or `some$_`  | serialize nothing                     |
+
+
+Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign).If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by crc32 hashing the text of the “equation” defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be
+unique).
 
 ### Namespaces
 
