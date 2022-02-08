@@ -6,6 +6,7 @@ TL-B (Type Language - Binary) serves to describe the type system, constructors, 
 - [TL-B Language](#tl-b-language)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
+  - [Namespaces](#namespaces)
   - [Comments](#comments)
   - [Library usage](#library-usage)
   - [Useful sources](#useful-sources)
@@ -46,6 +47,11 @@ notification#0x3f5476ca comment:StartComment          ↓
    | constructor
 ```
 
+### Namespaces
+
+Composite constructions like `<namespace_identifier>.<constructor_identifier>` and `<namespace_identifier>.<Type_identifier>` can be used as constructor- or type identifiers. The portion of the identifier to the left of the period is called the namespace. Moreover, the rule about a first uppercase letter in type identifiers and lowercase letter in constructor identifiers applies to the part of the construction after the period. For example, `msg.Body` would be a type, while `data.std_message` would be a constructor.
+
+Namespaces do not require a special declaration.
 
 ### Comments
 
