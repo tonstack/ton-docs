@@ -8,7 +8,9 @@ TL-B (Type Language - Binary) serves to describe the type system, constructors, 
 
 ## Overview
 
-We refer to any set of TL-B constructs as TL-B documents. A TL-B document usually consists of two sections, which are separated by the `---functions---` keyword. The first section consists of declarations of built-in types and aggregate types (i.e. their constructors). The second section consists of the declared functions, i.e. functional combinators. We may not follow the separation principle in small documents with no more than one functional combinator.
+We refer to any set of TL-B constructs as TL-B documents. A TL-B document usually consists of two sections, which are separated by the `---functions---` keyword. The first section consists of declarations of types (i.e. their constructors). The second section consists of the declared functions, i.e. functional combinators. 
+
+We may not follow the separation principle in small documents with no more than one functional combinator.
 
 The first and second sections consist of combinator declarations, each ending with a semicolon(`;`). However, the first section contains only constructors, while the second section only involves functions. Each combinator is declared using a “combinator declaration” in the format explained above. However, the combinator number and field names may be explicitly assigned.
 
@@ -27,7 +29,7 @@ rop:uint32 data:Any = MsgBody;
                      | type
                      | combinator name
 
-// ---functions---
+
 | combinator declaration                    |   | end symbol |
 |___________________________________________|         |
 notification#0x3f5476ca comment:StartComment          ↓
@@ -39,6 +41,7 @@ notification#0x3f5476ca comment:StartComment          ↓
    |__________________________________|
    | constructor
 ```
+
 
 ### Comments
 
