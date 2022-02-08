@@ -26,26 +26,29 @@ If additional type declarations are required after functions have been declared,
 To explicitly define 32-bit names of combinators, a hash mark (`#`) is added immediately after the combinator’s name, followed by 8 hexadecimal digits. In this documentation we will look at an example of how to correctly define a 32-bit combinator name for an internal message in the TON blockchain.
 
 Here is an example of a possible TL-B document.    
-We used the symbols `|`, `_`, `↓` for terminology - they are not part of the TL-B scheme.
+We used the symbols `|`, `_`, `↓`, `↑`, `-` for terminology - they are not part of the TL-B scheme.
 ```
-| combinator declaration |
-|                   _____|
-|__________________|
+| combinator       |
+| declaration      |   | end symbol |
+|__________________|         ↓
 rop:uint32 data:Any = MsgBody;
-                     | type
-                     | combinator name
+ ↑     ↑              | type |_____
+ident  type-expr      | combinator |
+----------------      | name       |
+field definition      |____________|
 
-
-| combinator declaration                    |   | end symbol |
-|___________________________________________|         |
-notification#0x3f5476ca comment:StartComment          ↓
-    real_body:(Either MsgBody ^MsgBody)      = Request;
-   |________| |_______________________|       |_______|
-   | const- | | constructor body      |       | functional
-   | ructor                           |       | combinator name
-   | name                             |
-   |__________________________________|
-   | constructor
+ ___________________________________________________________
+| combinator declaration                                    |
+|___________________________________________________________|
+|            | tag |                                        |    | end symbol |
+                ↓                                                      ↓
+notification#0x3f5476ca   real_body:(Either MsgBody ^MsgBody) = Request;
+|____________||_______|  |__________________________________|   |_____|___________
+| const- |    | prefix|  | field definition                 |   | functional      |
+| ructor |    | code  |  | ident:type-expr                  |   | combinator name |
+| name   |    |       |  |__________________________________|   |_________________|
+|_____________________|
+| constructor         |
 ```
 
 ### Constructor rules
@@ -70,8 +73,12 @@ learn by examples!
 | `some#_` or `some$_`  | serialize nothing                     |
 
 
-Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign).If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by crc32 hashing the text of the “equation” defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be
+Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign).If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by crc32 hashing the text of the “equation” defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
+
+All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be
 unique).
+
+
 
 ### Namespaces
 
