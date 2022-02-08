@@ -6,6 +6,7 @@ TL-B (Type Language - Binary) serves to describe the type system, constructors, 
 - [TL-B Language](#tl-b-language)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
+  - [Constructor rules](#constructor-rules)
   - [Namespaces](#namespaces)
   - [Comments](#comments)
   - [Library usage](#library-usage)
@@ -47,6 +48,22 @@ notification#0x3f5476ca comment:StartComment          ↓
    | constructor
 ```
 
+### Constructor rules
+
+```c++
+// ....
+hm_edge#_ {n:#} {X:Type} {l:#} {m:#} label:(HmLabel ~l n)
+{n = (~m) + l} node:(HashmapNode m X) = Hashmap n X;
+
+hmn_leaf#_ {X:Type} value:X = HashmapNode 0 X;
+// ....
+```
+
+The left-hand side of each equation describes a way to define, or even to
+serialize, a value of the type indicated in the right-hand side. Such a description begins with the name of a constructor, such as `hm_edge` or `hml_long`,
+immediately followed by an optional constructor tag, such as #_ or $10, which
+describes the bitstring used to encode (serialize) the constructor in question.
+
 ### Namespaces
 
 Composite constructions like `<namespace_identifier>.<constructor_identifier>` and `<namespace_identifier>.<Type_identifier>` can be used as constructor- or type identifiers. The portion of the identifier to the left of the period is called the namespace. Moreover, the rule about a first uppercase letter in type identifiers and lowercase letter in constructor identifiers applies to the part of the construction after the period. For example, `msg.Body` would be a type, while `data.std_message` would be a constructor.
@@ -76,7 +93,7 @@ You can use TL-B libraries to extend your documents and to avoid writing repetit
 In TL-B libraries there is no concept of cyclic import. Just indicate the dependency on some other document (library) at the top of the document with the keyword `dependson`. For example:
 
 file `mydoc.tlb`:
-```c
+```c++
 //
 // dependson "libraries/tonstdlib.tlb"
 //
