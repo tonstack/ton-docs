@@ -25,7 +25,7 @@ We used the symbols `|`, `_`, `↓` for terminology - they are not part of the T
 |__________________|
 rop:uint32 data:Any = MsgBody;
                      | type
-                     | combinator
+                     | combinator name
 
 // ---functions---
 | combinator declaration                    |   | end symbol |
@@ -34,7 +34,7 @@ notification#0x3f5476ca comment:StartComment          ↓
     real_body:(Either MsgBody ^MsgBody)      = Request;
    |________| |_______________________|       |_______|
    | const- | | constructor body      |       | functional
-   | ructor                           |       | combinator
+   | ructor                           |       | combinator name
    | name                             |
    |__________________________________|
    | constructor
