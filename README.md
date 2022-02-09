@@ -107,7 +107,7 @@ nothing$0 {X:Type} = Maybe X;
 just$1 {X:Type} value:X = Maybe X;
 ```
 
-Some occurrences of “variables” (i.e., already-defined fields) are prefixed by a tilde(`~`). This indicates that the variable’s occurrence is used in the opposite way of the default behavior: in the left-hand side of the equation, it means that the variable will be deduced (computed) based on this occurrence, instead of substituting its previously computed value; in the right-hand side, conversely, it means that the variable will not be deduced from the type being serialized, but rather that it will be computed during the deserialization process. In other words, a tilde transforms an “input argument” into an “output argument”, and vice versa. For example, we can use this to write a comment TL-B scheme for a TON translation, which must be serialized as a sequence of cells:
+Some occurrences of “variables” (i.e., already-defined fields) are prefixed by a tilde(`~`). This indicates that the variable’s occurrence is used in the opposite way of the default behavior: in the left-hand side of the equation, it means that the variable will be deduced (computed) based on this occurrence, instead of substituting its previously computed value; in the right-hand side, conversely, it means that the variable will not be deduced from the type being serialized, but rather that it will be computed during the deserialization process. In other words, a tilde transforms an “input argument” into an “output argument”, and vice versa. For example, we can use this to write TL-B scheme for simple transaction in the TON with comment(which must be serialized as a sequence of cells):
 
 ```c++
 empty#_ b:bits = Snake ~0;
