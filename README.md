@@ -127,6 +127,15 @@ op:#0 comment:Snake = Request;
 
 A caret (`ˆ`) preceding a type `X` means that instead of serializing a value of type `X` as a bitstring inside the current cell, we place this value into a separate cell, and add a reference to it into the current cell. Therefore `ˆX` means “the type of references to cells containing values of type `X`”.
 
+Parametrized type `#<= p` with `p : #` (this notation means `“p of type #”`, i.e., a natural number) denotes the subtype of the natural numbers type `#`, consisting of integers `0 ... p;` it is serialized into `[log2(p + 1)]` bits as an unsigned big-endian integer. Type `#` by itself is serialized as an unsigned 32-bit integer. Parametrized type `## b` with `b : #<=31` is equivalent to `#<= 2^b − 1`  (i.e., it is an unsigned b-bit integer). For example:
+
+```c++
+action_send_msg#0ec3c86d mode:(## 8) 
+  out_msg:^(MessageRelaxed Any) = OutAction;
+```
+
+In this scheme `mode:(## 8)` will be serialized as 8-bit unsigned integer.
+
 ### Namespaces
 
 Composite constructions like `<namespace_identifier>.<constructor_identifier>` and `<namespace_identifier>.<Type_identifier>` can be used as constructor- or type identifiers. The portion of the identifier to the left of the period is called the namespace. Moreover, the rule about a first uppercase letter in type identifiers and lowercase letter in constructor identifiers applies to the part of the construction after the period. For example, `msg.Body` would be a type, while `data.std_message` would be a constructor.
