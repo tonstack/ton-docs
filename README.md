@@ -82,12 +82,12 @@ import binascii
 
 def main():
     req_text = "some_request"
-    req = hex(binascii.crc32(bytes(req_text, "utf-8")) & 0x7fffffff)
-    print(f"{req_text}#{req} = Request;")  # some_request#0x733d0d35 = Request;
+    req = format(binascii.crc32(bytes(req_text, "utf-8")) & 0x7fffffff, 'x')
+    print(f"{req_text}#{req} = Request;")  # some_request#733d0d35 = Request;
 
     rsp_text = "some_response"
-    rsp = hex(binascii.crc32(bytes(rsp_text, "utf-8")) | 0x80000000)
-    print(f"{rsp_text}#{rsp} = Response;")  # some_response#0x88b0eb8f = Response;
+    rsp = format(binascii.crc32(bytes(rsp_text, "utf-8")) | 0x80000000, 'x')
+    print(f"{rsp_text}#{rsp} = Response;")  # some_response#88b0eb8f = Response;
 
 
 if __name__ == "__main__":
@@ -105,6 +105,15 @@ braces(`{`, `}`), which indicate that the field is not actually present in the s
 ```c++
 nothing$0 {X:Type} = Maybe X;
 just$1 {X:Type} value:X = Maybe X;
+```
+
+Some occurrences of “variables” (i.e., already-defined fields) are prefixed by a tilde(`~`). This indicates that the variable’s occurrence is used in the opposite way of the default behavior: in the left-hand side of the equation, it means that the variable will be deduced (computed) based on this occurrence, instead of substituting its previously computed value; in the right-hand side, conversely, it means that the variable will not be deduced from the type being serialized, but rather that it will be computed during the deserialization process. In other words, a tilde transforms an “input argument” into an “output argument”, and vice versa. For example, we can use this to write a comment TL-B scheme for a TON translation, which must be serialized as a sequence of cells:
+
+```c++
+empty#_ b:bits = Snake ~0;
+cons#_ {n:#} b:bits next:^(Snake ~n) = Snake ~(n + 1);
+
+op:#0 comment:Snake = Request;
 ```
 
 ### Namespaces
