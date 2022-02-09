@@ -156,7 +156,7 @@ block_info#9bc7a987 version:uint32
   = BlockInfo;
 ```
 
-In this example, the cell reference `^BlkMasterInfo` will be serialized only if `not_master` > 1.
+In this example, the cell reference `^BlkMasterInfo` will be serialized only if `not_master` > 0. And the `GlobalVersion` will be serialized only if `flags == 0`.
 
 ### Namespaces
 
