@@ -8,6 +8,7 @@ TL-B (Type Language - Binary) serves to describe the type system, constructors, 
 - [Overview](#overview)
 - [Constructors](#constructors)
 - [Field definitions](#field-definitions)
+- [Conditional (optional) fields](#conditional-optional-fields)
 - [Namespaces](#namespaces)
 - [Comments](#comments)
 - [Library usage](#library-usage)
@@ -42,12 +43,12 @@ learn by examples!
 |-----------------------|---------------------------------------|
 | `some#0x3f5476ca`     | 32-bit uint serialize from hex value  |
 | `some$0101`           | serialize `0101` raw bits             |
-| `some#`               | serialize crc32 of string `some`      |
-| `some$`               | serialize crc32 of string `some`      |
+| `some#`               | serialize `crc32("some") | 0x80000000`|
+| `some$`               | serialize `crc32("some") | 0x80000000`|
 | `some#_` or `some$_`  | serialize nothing                     |
 
 
-Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign). If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by hashing with crc32 algorithm the text of the “equation” defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
+Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign). If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by hashing with crc32 algorithm the text of the “equation” with `| 0x80000000` defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
 
 All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be unique).
 
@@ -127,6 +128,33 @@ action_send_msg#0ec3c86d mode:(## 8)
 ```
 
 In this scheme `mode:(## 8)` will be serialized as 8-bit unsigned integer.
+
+### Conditional (optional) fields
+
+The serialization of the conditional fields is determined from the other, already specified `(## 1)` fields. For example(from [`block.tlb`](https://github.com/newton-blockchain/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/block.tlb#L418)):
+
+```c++
+block_info#9bc7a987 version:uint32 
+  not_master:(## 1) 
+  after_merge:(## 1) before_split:(## 1) 
+  after_split:(## 1) 
+  want_split:Bool want_merge:Bool
+  key_block:Bool vert_seqno_incr:(## 1)
+  flags:(## 8) { flags <= 1 }
+  seq_no:# vert_seq_no:# { vert_seq_no >= vert_seqno_incr } 
+  { prev_seq_no:# } { ~prev_seq_no + 1 = seq_no } 
+  shard:ShardIdent gen_utime:uint32
+  start_lt:uint64 end_lt:uint64
+  gen_validator_list_hash_short:uint32
+  gen_catchain_seqno:uint32
+  min_ref_mc_seqno:uint32
+  prev_key_block_seqno:uint32
+  gen_software:flags . 0?GlobalVersion
+  master_ref:not_master?^BlkMasterInfo 
+  prev_ref:^(BlkPrevInfo after_merge)
+  prev_vert_ref:vert_seqno_incr?^(BlkPrevInfo 0)
+  = BlockInfo;
+```
 
 ### Namespaces
 
