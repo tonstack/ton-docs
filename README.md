@@ -131,7 +131,7 @@ In this scheme `mode:(## 8)` will be serialized as 8-bit unsigned integer.
 
 ### Conditional (optional) fields
 
-The serialization of the conditional fields is determined from the other, already specified `(## 1)` fields. For example(from [`block.tlb`](https://github.com/newton-blockchain/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/block.tlb#L418)):
+The serialization of the conditional fields is determined from the other, already specified fields. For example(from [`block.tlb`](https://github.com/newton-blockchain/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/block.tlb#L418)):
 
 ```c++
 block_info#9bc7a987 version:uint32 
