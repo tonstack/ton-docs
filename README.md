@@ -57,7 +57,8 @@ Tags may be given in either binary (after a dollar sign) or hexadecimal notation
 
 All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be unique).
 
-This is an example from the [TonToken](https://github.com/akifoq/TonToken/blob/master/func/token/scheme.tlb) repository that shows us how to implement an internal message TL-B scheme:
+This is an example from the [TonToken](https://github.com/akifoq/TonToken/blob/master/func/token/scheme.tlb) repository that shows  
+us how to implement an internal message TL-B scheme:
 
 ```c++
 extra#_ amount:Grams = Extra;
