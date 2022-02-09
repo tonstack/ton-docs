@@ -18,8 +18,6 @@ TL-B (Type Language - Binary) serves to describe the type system, constructors, 
 
 We refer to any set of TL-B constructs as TL-B documents. A TL-B document usually consists of declarations of types (i.e. their constructors) and functional combinators. The declaration of each combinator ends with a semicolon(`;`).
 
-To explicitly define 32-bit names of combinators, a hash mark (`#`) is added immediately after the combinator’s name, followed by 8 hexadecimal digits. In this documentation we will look at an example of how to correctly define a 32-bit combinator name for an internal message in the TON blockchain.
-
 Here is an example of a possible TL-B document.    
 <img alt="tlb structure" src="img/tlb.drawio.svg" width="100%">
 
@@ -50,7 +48,7 @@ learn by examples!
 
 Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign). If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by hashing with crc32 algorithm the text of the “equation” with `| 0x80000000` defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
 
-All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be unique).
+All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be unique); i.e. no tag can be a prefix of any other.
 
 This is an example from the [TonToken](https://github.com/akifoq/TonToken/blob/master/func/token/scheme.tlb) repository that shows  
 us how to implement an internal message TL-B scheme:
@@ -100,7 +98,7 @@ nothing$0 {X:Type} = Maybe X;
 just$1 {X:Type} value:X = Maybe X;
 ```
 
-Finally, some equalities may be included in curly brackets as well. These are certain “equations”, which must be satisfied by the “variables” included in them. If one of the variables is prefixed by a tilde, its value will be uniquely determined by the values of all other variables participating in the equation (which must be known at this point) when the definition is processed from the left to the right. For example:
+Finally, some equalities/inequalities may be included in curly brackets as well. These are certain “equations”, which must be satisfied by the “variables” included in them. If one of the variables is prefixed by a tilde, its value will be uniquely determined by the values of all other variables participating in the equation (which must be known at this point) when the definition is processed from the left to the right. For example:
 
 ```c++
 addr_std$10 anycast:(## 1) {anycast = 0}
