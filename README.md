@@ -71,9 +71,7 @@ transfer#4034a3c0 query_id:uint64
 
 In this example `transfer#4034a3c0` will be serialized as a 32 bit unsigned integer from hex value after hash sign(`#`). This meets the standard declaration of an `op` in the [Smart contract guidelines](https://ton.org/docs/#/howto/smart-contract-guidelines).
 
-To meet the standard described in paragraph 5 of the [Smart contract guidelines](https://ton.org/docs/#/howto/smart-contract-guidelines), it is not enough for us to calculate the crc32. 
-
-You can follow the following examples to define an `op` in requests or responses from smart contracts in a TL-B scheme:
+To meet the standard described in paragraph 5 of the [Smart contract guidelines](https://ton.org/docs/#/howto/smart-contract-guidelines), it is not enough for us to calculate the crc32. You can follow the following examples to define an `op` in requests or responses from smart contracts in a TL-B scheme:
 
 ```python
 import binascii
