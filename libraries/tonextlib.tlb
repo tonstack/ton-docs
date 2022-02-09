@@ -2,6 +2,10 @@
 // TON TL-B extension library
 //
 
+//
+// dependson "tonstdlib.tlb"
+// dependson "hashmap.tlb"
+//
 
 processed_upto$_ last_msg_lt:uint64 last_msg_hash:bits256 = ProcessedUpto;
 // key is [ shard:uint64 mc_seqno:uint32 ]  

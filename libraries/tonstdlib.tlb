@@ -2,6 +2,10 @@
 // TON TL-B standard library
 // 
 
+//
+// dependson "hashmap.tlb"
+//
+
 unit$_ = Unit;
 true$_ = True;
 
