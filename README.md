@@ -7,6 +7,7 @@ TL-B (Type Language - Binary) serves to describe the type system, constructors, 
 - [Table of contents](#table-of-contents)
 - [Overview](#overview)
 - [Constructors](#constructors)
+- [Field definitions](#field-definitions)
 - [Namespaces](#namespaces)
 - [Comments](#comments)
 - [Library usage](#library-usage)
@@ -50,11 +51,11 @@ learn by examples!
 | `some#0x3f5476ca`     | 32-bit uint serialize from hex value  |
 | `some$0101`           | serialize `0101` raw bits             |
 | `some#`               | serialize crc32 of string `some`      |
-| `some$`               | ? ? ? ?                               |
+| `some$`               | serialize crc32 of string `some`      |
 | `some#_` or `some$_`  | serialize nothing                     |
 
 
-Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign).If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by hashing with crc32 algorithm the text of the “equation” defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
+Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign). If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by hashing with crc32 algorithm the text of the “equation” defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
 
 All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be unique).
 
@@ -93,6 +94,18 @@ if __name__ == "__main__":
     main()
 ```
 
+
+### Field definitions
+
+The constructor and its optional tag are followed by field definitions. Each field definition is of the form `ident:type-expr`, where ident is an identifier with the name of the field16 (replaced by an underscore for anonymous fields), and type-expr is the field’s type. The type provided here is a type expression, which may include simple types or parametrized types with suitable parameters. Variables — i.e., the (identifiers of the) previously defined fields of types `#` (natural numbers) or Type (type of types) — may be used as parameters for the parametrized types. The serialization process recursively serializes each field according to its type, and the serialization of a value ultimately consists of the concatenation of bitstrings representing the constructor (i.e., the constructor tag) and the field values.
+
+Some fields may be implicit. Their definitions are surrounded by curly
+braces(`{`, `}`), which indicate that the field is not actually present in the serialization, but that its value must be deduced from other data (usually the parameters of the type being serialized). Example:
+
+```c++
+nothing$0 {X:Type} = Maybe X;
+just$1 {X:Type} value:X = Maybe X;
+```
 
 ### Namespaces
 
