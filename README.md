@@ -1,16 +1,16 @@
-## TL-B Language
+### TL-B Language
 
 TL-B (Type Language - Binary) serves to describe the type system, constructors, and existing functions. For example we can use TL-B schemes to build binary structures associated with the TON blockchain. Special TL-B parsers can read schemes to deserialize binary data into different objects.
 
 ### Table of contents
 - [TL-B Language](#tl-b-language)
-  - [Table of contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Constructor rules](#constructor-rules)
-  - [Namespaces](#namespaces)
-  - [Comments](#comments)
-  - [Library usage](#library-usage)
-  - [Useful sources](#useful-sources)
+- [Table of contents](#table-of-contents)
+- [Overview](#overview)
+- [Constructors](#constructors)
+- [Namespaces](#namespaces)
+- [Comments](#comments)
+- [Library usage](#library-usage)
+- [Useful sources](#useful-sources)
 
 ### Overview
 
@@ -29,7 +29,9 @@ Here is an example of a possible TL-B document.
 <img alt="tlb structure" src="img/tlb.drawio.svg" width="100%">
 
 
-### Constructor rules
+### Constructors
+
+Constructors are used to specify the type of combinator, including the state at serialization. For example constructors can also be used when you want to specify an `op` in query to a smart contract in the TON.
 
 ```c++
 // ....
@@ -51,11 +53,45 @@ learn by examples!
 | `some#_` or `some$_`  | serialize nothing                     |
 
 
-Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign).If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by crc32 hashing the text of the “equation” defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
+Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign).If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by hashing with crc32 algorithm the text of the “equation” defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
 
-All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be
-unique).
+All constructor names must be distinct, and constructor tags for the same type must constitute a prefix code (otherwise the deserialization would not be unique).
 
+This is an example from the [TonToken](https://github.com/akifoq/TonToken/blob/master/func/token/scheme.tlb) repository that shows us how to implement an internal message scheme to a smart contract:
+
+```c++
+extra#_ amount:Grams = Extra;
+
+addr_std$10 anycast:(## 1) {anycast = 0}
+      workchain_id:int8 address:bits256 = MsgAddrSmpl;
+
+transfer#4034a3c0 query_id:uint64
+    reciever:MsgAddrSmpl amount:Extra body:Any = Request;
+```
+
+In this example `transfer#4034a3c0` will be serialized as a 32 bit unsigned integer from hex value after hash sign(`#`). This meets the standard declaration of an `op` in the [Smart contract guidelines](https://ton.org/docs/#/howto/smart-contract-guidelines).
+
+To meet the standard described in paragraph 5 of the [Smart contract guidelines](https://ton.org/docs/#/howto/smart-contract-guidelines), it is not enough for us to calculate the crc32. 
+
+You can follow the following examples to define an `op` in requests or responses from smart contracts in a TL-B scheme:
+
+```python
+import binascii
+
+
+def main():
+    req_text = "some_request"
+    req = hex(binascii.crc32(bytes(req_text, "utf-8")) & 0x7fffffff)
+    print(f"{req_text}#{req} = Request;")  # some_request#0x733d0d35 = Request;
+
+    rsp_text = "some_response"
+    rsp = hex(binascii.crc32(bytes(rsp_text, "utf-8")) | 0x80000000)
+    print(f"{rsp_text}#{rsp} = Response;")  # some_response#0x88b0eb8f = Response;
+
+
+if __name__ == "__main__":
+    main()
+```
 
 
 ### Namespaces
