@@ -22,7 +22,6 @@ To explicitly define 32-bit names of combinators, a hash mark (`#`) is added imm
 Here is an example of a possible TL-B document.    
 <img alt="tlb structure" src="img/tlb.drawio.svg" width="100%">
 
-
 ### Constructors
 
 Constructors are used to specify the type of combinator, including the state at serialization. For example constructors can also be used when you want to specify an `op` in query to a smart contract in the TON.
@@ -131,9 +130,7 @@ In this scheme `mode:(## 8)` will be serialized as 8-bit unsigned integer.
 
 ### Namespaces
 
-Composite constructions like `<namespace_identifier>.<constructor_identifier>` and `<namespace_identifier>.<Type_identifier>` can be used as constructor- or type identifiers. The portion of the identifier to the left of the period is called the namespace. Moreover, the rule about a first uppercase letter in type identifiers and lowercase letter in constructor identifiers applies to the part of the construction after the period. For example, `msg.Body` would be a type, while `data.std_message` would be a constructor.
-
-Namespaces do not require a special declaration.
+Available in the TL version from Telegram, but as it turned out, not used in TL-B
 
 ### Comments
 
