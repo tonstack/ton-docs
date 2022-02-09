@@ -156,6 +156,8 @@ block_info#9bc7a987 version:uint32
   = BlockInfo;
 ```
 
+In this example, the cell reference `^BlkMasterInfo` will be serialized only if `not_master` > 1.
+
 ### Namespaces
 
 Available in the TL version from Telegram, but as it turned out, not used in TL-B
