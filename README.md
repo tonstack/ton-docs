@@ -107,6 +107,13 @@ nothing$0 {X:Type} = Maybe X;
 just$1 {X:Type} value:X = Maybe X;
 ```
 
+Finally, some equalities may be included in curly brackets as well. These are certain “equations”, which must be satisfied by the “variables” included in them. If one of the variables is prefixed by a tilde, its value will be uniquely determined by the values of all other variables participating in the equation (which must be known at this point) when the definition is processed from the left to the right. For example:
+
+```c++
+addr_std$10 anycast:(## 1) {anycast = 0}
+      workchain_id:int8 address:bits256 = MsgAddrSmpl;
+```
+
 Some occurrences of “variables” (i.e., already-defined fields) are prefixed by a tilde(`~`). This indicates that the variable’s occurrence is used in the opposite way of the default behavior: in the left-hand side of the equation, it means that the variable will be deduced (computed) based on this occurrence, instead of substituting its previously computed value; in the right-hand side, conversely, it means that the variable will not be deduced from the type being serialized, but rather that it will be computed during the deserialization process. In other words, a tilde transforms an “input argument” into an “output argument”, and vice versa. 
 
 For example, we can use this to write TL-B scheme for simple transaction in the TON with comment(which must be serialized as a sequence of cells):
@@ -117,6 +124,8 @@ cons#_ {n:#} b:bits next:^(Snake ~n) = Snake ~(n + 1);
 
 op:#0 comment:Snake = Request;
 ```
+
+A caret (`ˆ`) preceding a type `X` means that instead of serializing a value of type `X` as a bitstring inside the current cell, we place this value into a separate cell, and add a reference to it into the current cell. Therefore `ˆX` means “the type of references to cells containing values of type `X`”.
 
 ### Namespaces
 
