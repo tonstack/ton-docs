@@ -41,9 +41,9 @@ learn by examples!
 |-----------------------|-------------------------------------------|
 | `some#0x3f5476ca`     | 32-bit uint serialize from hex value      |
 | `some$0101`           | serialize `0101` raw bits                 |
-| `some#`               | serialize `crc32("some") \| 0x80000000`   |
-| `some$`               | serialize `crc32("some") \| 0x80000000`   |
+| `some`                | serialize `crc32(equation) \| 0x80000000` |
 | `some#_` or `some$_`  | serialize nothing                         |
+| `some#` or `some$`    | TL-B parsers will get it wrong            |
 
 
 Tags may be given in either binary (after a dollar sign) or hexadecimal notation (after a hash sign). If a tag is not explicitly provided, TL-B parser must computes a default 32-bit constructor tag by hashing with crc32 algorithm the text of the “equation” with `| 0x80000000` defining this constructor in a certain fashion. Therefore, empty tags must be explicitly provided by `#_` or `$_`. 
