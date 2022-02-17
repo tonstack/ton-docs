@@ -12,6 +12,7 @@ TL-B (Type Language - Binary) serves to describe the type system, constructors, 
 - [Namespaces](#namespaces)
 - [Comments](#comments)
 - [Library usage](#library-usage)
+- [IDE Support](#ide-support)
 - [Useful sources](#useful-sources)
 
 ### Overview
@@ -204,6 +205,11 @@ In dependencies, you are required to specify the correct relative path. The exam
 │   └── tonstdlib.tlb
 └── ...
 ```
+
+### IDE Support
+
+The [intellij-ton](https://github.com/andreypfau/intellij-ton) plugin supports Fift, FunC and also TL-B. 
+The TL-B grammar is described in the file [TlbParser.bnf](https://github.com/andreypfau/intellij-ton/blob/dev/src/main/grammars/TlbParser.bnf)
 
 ### Useful sources
 
