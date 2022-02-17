@@ -209,7 +209,7 @@ In dependencies, you are required to specify the correct relative path. The exam
 ### IDE Support
 
 The [intellij-ton](https://github.com/andreypfau/intellij-ton) plugin supports Fift, FunC and also TL-B.  
-The TL-B grammar is described in the [TlbParser.bnf](https://github.com/andreypfau/intellij-ton/blob/dev/src/main/grammars/TlbParser.bnf) file.
+The TL-B grammar is described in the [TlbParser.bnf](https://github.com/andreypfau/intellij-ton/blob/main/src/main/grammars/TlbParser.bnf) file.
 
 ### Useful sources
 
