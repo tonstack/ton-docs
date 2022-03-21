@@ -213,6 +213,6 @@ The TL-B grammar is described in the [TlbParser.bnf](https://github.com/andreypf
 
 ### Useful sources
 
-- [Telegram Open Network Virtual Machine](https://newton-blockchain.github.io/docs/tvm.pdf)
+- [Telegram Open Network Virtual Machine](https://ton.org/docs/tvm.pdf)
 - [A description of an older version of TL](https://core.telegram.org/mtproto/TL)
 - [block.tlb](https://github.com/newton-blockchain/ton/blob/master/crypto/block/block.tlb)
