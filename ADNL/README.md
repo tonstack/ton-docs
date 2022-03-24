@@ -59,7 +59,7 @@ To send a datagram, peer (client or server) must build the following structure, 
 | length    | 4 bytes (LE)         | Length of the whole datagram, excluding `length` field     |
 | nonce     | 32 bytes             | Random value                                               |
 | buffer    | `length - 64` bytes  | Actual data to be sent to the other side                   |
-| hash      | 32 bytes             | `SHA-256(nonce || buffer)` to ensure integrity             |   
+| hash      | 32 bytes             | `SHA-256(nonce \|\| buffer)` to ensure integrity             |   
 
 The whole structure must be encrypted by the corresponding AES instance (TX for client -> server, RX for server -> client). 
 
