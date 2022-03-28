@@ -18,3 +18,7 @@ This repository is our own documentation on the TON blockchain, as well as some 
 #### Docs based on the work of Dr. Nikolai Durov
 
 - [The Open Network](https://ton-blockchain.github.io/docs/ton.pdf)
+
+#### Docs from TON Foundation
+
+- [ton.org docs](https://ton.org/docs/#/)
