@@ -22,3 +22,7 @@ This repository is our own documentation on the TON blockchain, as well as some 
 #### Docs from TON Foundation
 
 - [ton.org docs](https://ton.org/docs/#/)
+
+#### Other useful links
+
+- [awesome-ton-smart-contracts](https://github.com/dkeysil/awesome-ton-smart-contracts)
