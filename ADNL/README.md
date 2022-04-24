@@ -5,10 +5,11 @@ ADNL is the core protocol of TON, which helps network peers to communicate with 
 Each peer must have at least one identity, but it's not restricted to use multiple. Each identity is a keypair, which is used to perform Diffie-Hellman between peers. Abstract network address is derived from public key in such way: `address = SHA-256(type_id || public_key)`. Note that type_id must be serialized as little-endian uint32.
 
 ## Public-key cryptosystems list
-| type_id    | cryptosystem |
-|------------|--------------|
-| 0x4813b4c6 | ed25519      |
+| type_id    | cryptosystem        |
+|------------|---------------------|
+| 0x4813b4c6 | ed25519<sup>1</sup> |
 
+_1. To perform x25519, keypair must be generated in x25519 format. However, public key is transmitted over the network in ed25519 format, so you have to convert public key from x25519 to ed25519, example of such conversion can be found [here](https://github.com/tonstack/adnl-rs/blob/master/src/integrations/dalek.rs#L10) for Rust and [here](https://github.com/andreypfau/curve25519-kotlin/blob/f008dbc2c0ebc3ed6ca5d3251ffb7cf48edc91e2/src/commonMain/kotlin/curve25519/MontgomeryPoint.kt#L39) for Kotlin._
 
 ## Client-server protocol (ADNL over TCP)
 Client connects to server using TCP and sends ADNL handshake packet, which contains server abstract address, client public key, and encrypted AES-CTR session parameters, which is determined by the client. 
